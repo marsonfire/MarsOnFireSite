@@ -10,6 +10,6 @@ export class GamesService {
   private http = inject(HttpClient);
 
   getGames(){
-    return this.http.get(`${environment.apiUrl}/games`);
+    return this.http.get(`${environment.apiUrl}/games/getmygames`);
   }
 }

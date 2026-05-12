@@ -2,9 +2,11 @@
 {
     public class Game
     {
-        public string Name { get; set; } = String.Empty;
-        public string Description { get; set; } = String.Empty;
-        public DateTime ReleaseDate { get; set; }
-        public string Link { get; set; } = String.Empty;
+        public String SteamAppId { get; set; } = String.Empty;
+        public String Name { get; set; } = String.Empty;
+        public String ShortDescription { get; set; } = String.Empty;
+        public String ReleaseDate { get; set; }
+        public String? Price { get; set;} = String.Empty;
+        public String Link { get; set; } = String.Empty;
     }
 }
