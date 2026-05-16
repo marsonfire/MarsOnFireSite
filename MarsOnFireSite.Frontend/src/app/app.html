@@ -1,62 +1,41 @@
-<main class="main">
-  <div id="content">
-    
-    <div id="topBar">
-      <header>
-        <h1 class="centerTopHeader">Mars On Fire</h1>
-      </header>
+<div id="topBar">
+  <h1 class="site-title">Mars On Fire</h1>
+</div>
+
+@if (isLoading()) {
+  <p class="state-msg">Loading...</p>
+}
+@else if (error()) {
+  <p class="state-msg error">{{ error() }}</p>
+}
+@else {
+  <div class="content">
+    <p class="section-label">My Games</p>
+
+    <div class="game-grid">
+      @for (game of myGames(); track game.steamAppId) {
+        <div class="game-card">
+          <div class="game-name">{{ game.name }}</div>
+          <div class="game-desc">{{ game.shortDescription }}</div>
+          <div class="game-meta">
+            @if (game.price === 'Coming Soon') {
+              <span class="game-price coming-soon">Coming Soon</span>
+            } @else {
+              <span class="game-price">{{ game.price }}</span>
+            }
+            <span class="game-date">{{ game.releaseDate }}</span>
+          </div>
+          @if (game.price === 'Coming Soon') {
+            <span class="steam-btn disabled">Coming Soon</span>
+          } @else {
+            <a class="steam-btn" [href]="game.link" target="_blank" rel="noopener noreferrer">
+              &#9654; View on Steam
+            </a>
+          }
+        </div>
+      }
     </div>
-
-    <!-- Display Loading if our signal is still loading data, error if something went wrong, and otherwise display the game data -->
-    @if (isLoading()) {
-      <h4 class="center">Loading...</h4>
-    }
-    @else if (error()) {
-      <h4 class="center" style="color: red;">{{error()}}</h4>
-    }
-    @else{
-      <div class="main">
-        <!-- https://material.angular.dev/components/table/overview -->
-        <table mat-table [dataSource]="myGames()">
-
-          <ng-container matColumnDef="steamAppId">
-            <th mat-header-cell *matHeaderCellDef>Steam App Id</th>
-            <td mat-cell *matCellDef="let game"> {{game.steamAppId}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let game"> {{game.name}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="shortDescription">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let game"> {{game.shortDescription}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="releaseDate">
-            <th mat-header-cell *matHeaderCellDef>Release Date</th>
-            <td mat-cell *matCellDef="let game"> {{game.releaseDate}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let game"> {{game.price}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="link">
-            <th mat-header-cell *matHeaderCellDef>Link</th>
-            <td mat-cell *matCellDef="let game"> <a href={{game.link}}>Steam</a> </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
-
-        </table>
-      </div>
-  }
   </div>
-</main>
-
+}
 
 <router-outlet />
