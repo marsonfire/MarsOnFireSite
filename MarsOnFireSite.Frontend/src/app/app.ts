@@ -1,10 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatTableModule } from '@angular/material/table';
 import { GamesService } from './services/games.service';
 import { catchError, finalize, of } from 'rxjs';
 
-//setup the Game object for our table
+//Game data shape returned by the backend API
 interface Game {
   steamAppId: string
   name: string;
@@ -16,7 +15,7 @@ interface Game {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatTableModule],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -27,9 +26,6 @@ export class App implements OnInit{
   isLoading = signal<boolean>(true);
   error = signal<string | null>(null);
   myGames = signal<Game[]>([]);
-
-  //these are the columns we'll use for mat-table
-  columnsToDisplay = ['steamAppId', 'name', 'shortDescription', 'releaseDate', "price", 'link'];
 
   //We will call the GamesService which will be used to actually make the API call to the backend
   private gamesService = inject(GamesService)
