@@ -11,14 +11,14 @@
     font-size: 4rem;
     font-weight: 1000;
     color: rgb(255, 107, 9);
-    text-shadow: 0 0 40px rgba(255, 100, 0, 0.6), 0 0 80px rgba(255, 60, 0, 0.3);
+    text-shadow: 0 0 40px rgba(255, 100, 0, 0.6);
   }
 
   .sectionHeader{
     color: rgb(255, 107, 9);
     font-weight: 800;
     font-size: 3rem;
-    text-shadow: 0 0 100px rgba(255, 107, 9, 1);
+    text-shadow: 0 0 50px rgba(255, 107, 9, 0.5);
     margin: 30px;
     text-decoration: underline;
   }
