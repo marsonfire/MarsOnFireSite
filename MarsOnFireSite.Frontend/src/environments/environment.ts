@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://prod:5000'
+    apiUrl: 'https://marsonfiresite.onrender.com/api'
 };
