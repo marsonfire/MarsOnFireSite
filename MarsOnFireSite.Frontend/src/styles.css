@@ -57,3 +57,23 @@
     text-shadow: 0 0 40px rgba(255, 100, 0, 0.6), 0 0 80px rgba(255, 60, 0, 0.3);
     text-decoration: none;
   }
+
+  @media (max-width: 768px) {
+  .centerTopHeader {
+    font-size: 2.5rem;
+  }
+  .sectionHeader {
+    font-size: 2rem;
+    margin: 20px 10px;
+  }
+  .sectionText {
+    font-size: 1.1rem;
+  }
+  .navBar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .navBar a {
+    font-size: 1.2rem;
+  }
+}

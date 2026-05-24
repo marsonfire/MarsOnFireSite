@@ -2,6 +2,8 @@
     max-width: 1500px;
     margin: 0 auto;
     padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .grid{
@@ -35,4 +37,11 @@
 .gameInfo{
     color: rgb(253, 219, 191);
     padding: 5px
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
