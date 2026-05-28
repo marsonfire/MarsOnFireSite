@@ -1,5 +1,6 @@
 ﻿using MarsOnFireSite.API.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using static System.Net.WebRequestMethods;
 
@@ -10,10 +11,23 @@ namespace MarsOnFireSite.API.Controllers
     public class GamesController : ControllerBase
     {
         private HttpClient _httpClient = new HttpClient();
+        private IMemoryCache _cache;
+        private const string CACHE_KEY = "STEAM_GAMES";
+
+        public GamesController(IMemoryCache cache)
+        {
+            _cache = cache;
+        }
+
 
         [HttpGet("GetMyGames")]
         public async Task<IActionResult> GetMyGames()
         {
+            if (_cache.TryGetValue(CACHE_KEY, out List<Game> steamGames))
+            {
+                return Ok(steamGames);
+            }
+
             //setup the ids of the games
             List<string> appIds = new List<string>() { "2745080", "2929510", "3197230", "3652230", "4097350" };
             List<Game> games = new List<Game>();
@@ -55,7 +69,14 @@ namespace MarsOnFireSite.API.Controllers
                 }
 
                 //order by price
-                return Ok(games.OrderBy(x => x.Price));
+                games = games.OrderBy(x => x.Price).ToList();
+
+                _cache.Set(CACHE_KEY, games, new MemoryCacheEntryOptions()
+                {
+                    AbsoluteExpiration = DateTimeOffset.Now + TimeSpan.FromDays(7)
+                });
+
+                return Ok(games);
             }
             catch (Exception ex)
             {

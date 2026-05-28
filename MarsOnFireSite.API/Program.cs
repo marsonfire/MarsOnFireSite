@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddCors(options =>
