@@ -8,5 +8,6 @@
         public String ReleaseDate { get; set; }
         public String? Price { get; set;} = String.Empty;
         public String Link { get; set; } = String.Empty;
+        public String ImageUrl { get; set; } = String.Empty;
     }
 }

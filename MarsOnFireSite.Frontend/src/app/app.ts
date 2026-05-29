@@ -11,6 +11,7 @@ interface Game {
   releaseDate: string;
   price: string
   link: string;
+  imageUrl: string;
 }
 
 @Component({

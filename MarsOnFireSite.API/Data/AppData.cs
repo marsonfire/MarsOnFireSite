@@ -15,5 +15,8 @@ namespace MarsOnFireSite.API.Data
 
         [JsonPropertyName("price_overview")]
         public Price? Price { get; set; } = null;
+
+        [JsonPropertyNameAttribute("header_image")]
+        public string ImageUrl { get; set; }
     }
 }

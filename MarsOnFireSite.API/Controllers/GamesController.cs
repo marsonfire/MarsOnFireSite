@@ -53,6 +53,7 @@ namespace MarsOnFireSite.API.Controllers
                             var appData = jsonData[id].Data;
                             var releaseDate = appData.ReleaseDate;
                             var price = appData.Price;
+                            var imageUrl = appData.ImageUrl;
 
                             //add the game to our list to return later to the frontend
                             games.Add(new Game
@@ -62,7 +63,8 @@ namespace MarsOnFireSite.API.Controllers
                                 ShortDescription = appData.ShortDescription,
                                 ReleaseDate = releaseDate.ComingSoon ? "Coming Soon " + releaseDate.Date : releaseDate.Date,
                                 Price = price == null ? "Coming Soon" : price.FormattedPrice,
-                                Link = $"https://store.steampowered.com/app/{id}"
+                                Link = $"https://store.steampowered.com/app/{id}",
+                                ImageUrl = imageUrl
                             });
                         }
                     }
